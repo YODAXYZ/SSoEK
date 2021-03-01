@@ -10,5 +10,13 @@
 8) select departure_airport airport_code, count(*) passengers from flights inner join ticket_flights on flights.flight_id=ticket_flights.flight_id where departure_airport in ('SVO', 'VKO', 'DME') group by f.departure_airport order by passengers desc;
 9) select departure_airport as airport_code, count(flight_no) as cancelled_flights_number from flights where status = 'Cancelled' group by departure_airport order by cancelled_flights_number desc limit 3 ;
 10) select MONTH(scheduled_departure) month, count(*) cancelled_flights_number from flights where status='Cancelled' group by month order by month;
-11)
+11) select city, count(*) as cancelled_flights_number
+from flights join airports on flights.departure_airport = airports.airport_code
+where status = "Cancelled"
+group by city
+order by cancelled_flights_number desc
+limit 5 ;
+
 Пропуски это задания, которые забыл скопировать (там после отправки нельзя копировать), если надо кину
+
+Я докинул остальное. Теперь фул набор есть.
