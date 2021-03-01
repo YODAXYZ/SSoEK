@@ -1,16 +1,59 @@
 Очень важно менять код добавляйте as <name> for block code (select * from) as fl etc And also you can use name aircrafts.model (full object indication)!!!!
 ВАЖНО !!! За задания баллы не снимают можно тестить)))))
 
-2) select model,aircrafts.range from aircrafts where aircrafts.range between 1300 and 5800 order by aircrafts.range;
-3) select model,count(status) as flights_num from aircrafts inner join flights on aircrafts.aircraft_code = flights.aircraft_code group by status,model having status ='Arrived' order by flights_num desc;
-4) select flight_id, round(avg(amount)) as avg_amount from ticket_flights group by flight_id having avg(amount) between 3301 and 5000 order by flight_id asc;
-5) select sum(amount) from ticket_flights inner join flights on ticket_flights.flight_id = flights.flight_id group by status where status ='Cancelled';
-6) select sum(amount) as lost_profit from ticket_flights inner join flights on ticket_flights.flight_id=flights.flight_id where flights.scheduled_departure between '2017-08-17 00:00:00' and '2017-08-23 00:00:00' group by status having status='Cancelled';
-7) select DAYNAME(scheduled_departure) as dayname , count(scheduled_departure) as flights from flights where departure_airport in ('SVO', 'VKO', 'DME') group by DAYNAME(scheduled_departure) order by flights desc ;
-8) select departure_airport airport_code, count(*) passengers from flights inner join ticket_flights on flights.flight_id=ticket_flights.flight_id where departure_airport in ('SVO', 'VKO', 'DME') group by f.departure_airport order by passengers desc;
-9) select departure_airport as airport_code, count(flight_no) as cancelled_flights_number from flights where status = 'Cancelled' group by departure_airport order by cancelled_flights_number desc limit 3 ;
-10) select MONTH(scheduled_departure) month, count(*) cancelled_flights_number from flights where status='Cancelled' group by month order by month;
-11) select city, count(*) as cancelled_flights_number
+2)
+select model,aircrafts.range
+from aircrafts
+where aircrafts.range between 1300 and 5800
+order by aircrafts.range;
+3)
+select model,count(status) as flights_num
+from aircrafts inner join flights on aircrafts.aircraft_code = flights.aircraft_code
+group by status,model
+having status ='Arrived'
+order by flights_num desc;
+4)
+select flight_id, round(avg(amount)) as avg_amount
+from ticket_flights
+group by flight_id
+having avg(amount) between 3301 and 5000
+order by flight_id asc;
+5)
+select sum(amount)
+from ticket_flights inner join flights on ticket_flights.flight_id = flights.flight_id
+group by status
+where status ='Cancelled';
+6)
+select sum(amount) as lost_profit
+from ticket_flights inner join flights on ticket_flights.flight_id=flights.flight_id
+where flights.scheduled_departure between '2017-08-17 00:00:00' and '2017-08-23 00:00:00'
+group by status
+having status='Cancelled';
+7)
+select DAYNAME(scheduled_departure) as dayname , count(scheduled_departure) as flights
+from flights where departure_airport in ('SVO', 'VKO', 'DME')
+group by DAYNAME(scheduled_departure)
+order by flights desc ;
+8)
+select departure_airport airport_code, count(*) passengers
+from flights inner join ticket_flights on flights.flight_id=ticket_flights.flight_id
+where departure_airport in ('SVO', 'VKO', 'DME')
+group by f.departure_airport
+order by passengers desc;
+9)
+select departure_airport as airport_code, count(flight_no) as cancelled_flights_number
+from flights where status = 'Cancelled'
+group by departure_airport
+order by cancelled_flights_number desc
+limit 3 ;
+10)
+select MONTH(scheduled_departure) month, count(*) cancelled_flights_number
+from flights where status='Cancelled'
+group by month
+order by month;
+
+11)
+select city, count(*) as cancelled_flights_number
 from flights join airports on flights.departure_airport = airports.airport_code
 where status = "Cancelled"
 group by city
